@@ -19,8 +19,23 @@
 class Solution {
 public:
     void helper(TreeNode* root, int &ret) {
-        if (!root) return 0;
-        
+        if (!root) return;
+        if (!(root -> val % 2)) {
+            if (root -> left) {
+                TreeNode* leftChild = root -> left;
+                ret += leftChild-> left ? leftChild -> left -> val : 0;
+                ret += leftChild-> right ? leftChild -> right -> val : 0;
+            }
+            if (root -> right) {
+                TreeNode* rightChild = root -> right;
+                ret += rightChild-> left ? rightChild -> left -> val : 0;
+                ret += rightChild-> right ? rightChild -> right -> val : 0;
+            }
+        }
+        helper(root -> left, ret);
+        helper(root -> right, ret);
+
+
     }
     int sumEvenGrandparent(TreeNode* root) {
         int ret = 0;
