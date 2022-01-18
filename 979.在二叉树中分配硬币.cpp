@@ -18,16 +18,17 @@
  */
 class Solution {
 public:
-    int helper(TreeNode* root, int &moves) {
+    int helper(TreeNode* root, int &ret) {
         if (!root) return 0;
-        int left = helper(root -> left, moves);
-        int right = helper(root -> right, moves);
-        moves += abs(left) + abs(right);
-        return left + right + root -> val - 1;
+        int left = helper(root -> left, ret);
+        int right = helper(root -> right, ret);
+        ret += abs(left) + abs(right);
+        return root -> val + left + right - 1;
     }
-    int distributeCoins(TreeNode* root, int moves = 0) {
-        helper(root, moves);
-        return moves;
+    int distributeCoins(TreeNode* root) {
+        int ret = 0;
+        helper(root, ret);
+        return ret;
     }
 };
 // @lc code=end
