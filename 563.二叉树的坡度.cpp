@@ -18,18 +18,17 @@
  */
 class Solution {
 public:
-    int res = 0;
-    int helper(TreeNode* root) {
+    int helper(TreeNode* root, int &ret) {
         if (!root) return 0;
-        int ls = helper(root -> left);
-        int rs = helper(root -> right);
-        res += abs(ls - rs);
-        return ls + rs + root -> val;
+        int left = helper(root -> left, ret);
+        int right = helper(root -> right, ret);
+        ret += abs(left - right);
+        return root -> val + left + right;
     }
     int findTilt(TreeNode* root) {
-        res = 0;
-        helper(root);
-        return res;
+        int ret = 0;
+        helper(root, ret);
+        return ret;
     }
 };
 // @lc code=end
